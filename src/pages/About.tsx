@@ -1,4 +1,3 @@
-import React from 'react';
 import { Store, Award, Package } from 'lucide-react';
 
 const About = () => {
