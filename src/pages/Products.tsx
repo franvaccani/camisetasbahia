@@ -167,7 +167,7 @@ const Products = () => {
           {/* Product Grid */}
           <div className="flex-1">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredProducts.map(product => (
+              {filteredProducts.map((product: { id: number; name: string; category: string; subcategory: string; price: number; images: string[] }) => (
                 <a
                   key={product.id}
                   href={`/producto/${product.id}`}

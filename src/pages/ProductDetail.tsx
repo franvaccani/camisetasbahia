@@ -72,11 +72,11 @@ const ProductDetail = () => {
   };
 
   const nextImage = () => {
-    setCurrentImageIndex((prev) => (prev + 1) % product.images.length);
+    setCurrentImageIndex((prev: number) => (prev + 1) % product.images.length);
   };
 
   const prevImage = () => {
-    setCurrentImageIndex((prev) => (prev - 1 + product.images.length) % product.images.length);
+    setCurrentImageIndex((prev: number) => (prev - 1 + product.images.length) % product.images.length);
   };
 
   return (
