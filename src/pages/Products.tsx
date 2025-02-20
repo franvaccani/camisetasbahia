@@ -86,8 +86,8 @@ const Products = () => {
   return (
     <div className="bg-gray-50 min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Nuestras Camisetas</h1>
+        <div className="flex justify-between max-sm:mb-14 items-center mb-8">
+          <h1 className="text-3xl max-sm:text-2xl font-bold text-gray-900">Nuestras Camisetas</h1>
           <button
             onClick={() => setShowFilters(!showFilters)}
             className="md:hidden flex items-center space-x-2 text-gray-600"
@@ -149,7 +149,7 @@ const Products = () => {
                             })}
                             className={`w-full text-left px-4 py-2 rounded-md transition ${
                               currentSubcategory === subcategory.id
-                                ? 'bg-blue-600 text-white'
+                                ? 'bg-black text-white'
                                 : 'text-gray-600 hover:bg-gray-100'
                             }`}
                           >

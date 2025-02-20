@@ -31,7 +31,7 @@ const Footer = () => {
           
           <div>
             <h3 className="text-xl font-bold mb-4">Síguenos</h3>
-            <div className="flex space-x-4">
+            <div className="flex max-sm:space-x-0 space-x-4">
               <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" 
                 className=" transition">
                 <Instagram className="h-6 w-6" />

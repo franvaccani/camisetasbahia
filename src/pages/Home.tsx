@@ -75,7 +75,7 @@ const Home = () => {
                   </div>
                   <div className="p-4">
                     <h3 className="text-lg font-semibold text-gray-900">{product.name}</h3>
-                    <p className="text-blue-600 font-bold mt-2">
+                    <p className="text-black font-bold mt-2">
                       ${product.price.toLocaleString()}
                     </p>
                   </div>
@@ -100,7 +100,7 @@ const Home = () => {
                   </div>
                   <div className="p-4">
                     <h3 className="text-lg font-semibold text-gray-900">{product.name}</h3>
-                    <p className="text-blue-600 font-bold mt-2">
+                    <p className="text-black font-bold mt-2">
                       ${product.price.toLocaleString()}
                     </p>
                   </div>
