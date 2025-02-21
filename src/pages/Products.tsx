@@ -132,8 +132,8 @@ const Products = () => {
   const currentCategory = searchParams.get('categoria') || 'todos';
   const currentSubcategory = searchParams.get('subcategoria');
   const currentSubItem = searchParams.get('subitem');
-  const [showFilters, setShowFilters] = React.useState(false);
   const [expandedCategory, setExpandedCategory] = React.useState<string | null>(null);
+  const [showFilters] = React.useState(false);
   const [searchTerm, setSearchTerm] = React.useState('');
   const [selectedTemporadas, setSelectedTemporadas] = React.useState<string[]>([]);
   const [selectedMarcas, setSelectedMarcas] = React.useState<string[]>([]);
@@ -197,7 +197,7 @@ const Products = () => {
         <div className="flex flex-col md:flex-row gap-8">
           {/* Filters Sidebar */}
           <div className={`md:w-64 ${showFilters ? 'block' : 'hidden md:block'}`}>
-            <div className="space-y-6">
+          <div className="md:w-64 hidden md:block">
               {/* Categories */}
               <div className="bg-white p-4 rounded-lg shadow-md">
                 <h2 className="font-semibold text-gray-900 mb-4">Categorías</h2>

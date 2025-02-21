@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Search } from 'lucide-react';
-import { Truck, CreditCard, ShieldCheck, MessageCircle } from 'lucide-react';
+import { Truck, CreditCard, ShieldCheck} from 'lucide-react';
 
 import Carrousel from '../components/Carrousel';
 const featuredProducts = [
