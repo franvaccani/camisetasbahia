@@ -21,7 +21,7 @@ const brands = [
   { logo: logo4 },
   { logo: logo5 },
   { logo: logo6 },
-  { logo: logo7 },
+  { logo: logo7 }
 ];
 
 export default function InfiniteCarousel() {
