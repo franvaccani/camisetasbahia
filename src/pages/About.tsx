@@ -16,21 +16,21 @@ const About = () => {
         {/* Features */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
           <div className="text-center p-6">
-            <Store className="h-12 w-12 text-blue-600 mx-auto mb-4" />
+            <Store className="h-12 w-12 text-black mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-gray-900 mb-2">Tienda Física</h3>
             <p className="text-gray-600">
               Visítanos en nuestra tienda en Bahía Blanca, donde podrás ver y probar nuestros productos.
             </p>
           </div>
           <div className="text-center p-6">
-            <Award className="h-12 w-12 text-blue-600 mx-auto mb-4" />
+            <Award className="h-12 w-12 text-black mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-gray-900 mb-2">Productos Originales</h3>
             <p className="text-gray-600">
               Garantizamos la autenticidad de todos nuestros productos con certificados oficiales.
             </p>
           </div>
           <div className="text-center p-6">
-            <Package className="h-12 w-12 text-blue-600 mx-auto mb-4" />
+            <Package className="h-12 w-12 text-black mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-gray-900 mb-2">Envíos Seguros</h3>
             <p className="text-gray-600">
               Realizamos envíos a todo el país con seguimiento y garantía de entrega.

@@ -8,13 +8,13 @@ const Navbar = () => {
   return (
     <nav className="bg-[#b6142c]  text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center  h-20 justify-between">
+        <div className="flex items-center  h-28 justify-between">
           <Link to="/" className="flex items-center space-x-2">
-            <img className='w-28' src={logo} alt="" />
+            <img className='w-36' src={logo} alt="" />
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex text-xl items-center space-x-8">
             <Link
               to="/"
               className="pb-[2px] hover:text-gray-300 relative group transition"

@@ -18,38 +18,41 @@ const Contact = () => {
             
             <div className="space-y-6">
               <div className="flex items-center space-x-4">
-                <div className="bg-red-100 p-3 rounded-full">
-                  <Phone className="h-6 w-6 text-red-600" />
+                <div className="bg-gray-200 p-3 rounded-full">
+                  <Phone className="h-6 w-6 text-black" />
                 </div>
                 <div>
                   <p className="font-semibold text-gray-900">Teléfono</p>
-                  <p className="text-gray-600">+54 291 123-4567</p>
+                  <p className="text-gray-600">291-5322338</p>
                 </div>
               </div>
 
               <div className="flex items-center space-x-4">
-                <div className="bg-red-100 p-3 rounded-full">
-                  <Mail className="h-6 w-6 text-red-600" />
+                <div className="bg-gray-200 p-3 rounded-full">
+                  <Mail className="h-6 w-6 text-black" />
                 </div>
                 <div>
                   <p className="font-semibold text-gray-900">Email</p>
-                  <p className="text-gray-600">info@camisetasbahia.com</p>
+                  <p className="text-gray-600">camisetasbahia@hotmail.com</p>
                 </div>
               </div>
 
               <div className="flex items-center space-x-4">
-                <div className="bg-red-100 p-3 rounded-full">
-                  <MapPin className="h-6 w-6 text-red-600" />
+                <div className="bg-gray-200 p-3 rounded-full">
+                  <MapPin className="h-6 w-6 text-black" />
                 </div>
                 <div>
                   <p className="font-semibold text-gray-900">Dirección</p>
-                  <p className="text-gray-600">Av. Principal 123, Bahía Blanca</p>
+                  <p className="text-gray-600">Zapiola 123 - Camisetas Bahia (Local 3)</p>
+                  <p className="text-gray-600">Zapiola 123 - Fan Store (Local 2)</p>
+                  <p className="text-gray-600">Zapiola 148 - Camisetas Bahia Basquet</p>
+
                 </div>
               </div>
 
               <div className="flex items-center space-x-4">
-                <div className="bg-red-100 p-3 rounded-full">
-                  <Clock className="h-6 w-6 text-red-600" />
+                <div className="bg-gray-200 p-3 rounded-full">
+                  <Clock className="h-6 w-6 text-black" />
                 </div>
                 <div>
                   <p className="font-semibold text-gray-900">Horario de Atención</p>
