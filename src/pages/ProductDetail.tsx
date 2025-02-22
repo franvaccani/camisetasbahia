@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { MessageCircle, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ShoppingCart, Heart, MessageCircle, ChevronLeft, ChevronRight } from 'lucide-react';
 
 type Product = {
   id: number;
@@ -12,7 +12,7 @@ type Product = {
   images: string[];
 };
 
-const products: { [key: number]: Product } = {
+const products: { [key: string]: Product } = {
   1: {
     id: 1,
     name: 'Argentina 2022 Campeón',
@@ -72,11 +72,11 @@ const ProductDetail = () => {
   };
 
   const nextImage = () => {
-    setCurrentImageIndex((prev: number) => (prev + 1) % product.images.length);
+    setCurrentImageIndex((prev) => (prev + 1) % product.images.length);
   };
 
   const prevImage = () => {
-    setCurrentImageIndex((prev: number) => (prev - 1 + product.images.length) % product.images.length);
+    setCurrentImageIndex((prev) => (prev - 1 + product.images.length) % product.images.length);
   };
 
   return (
@@ -127,7 +127,7 @@ const ProductDetail = () => {
           {/* Product Info */}
           <div className="flex flex-col">
             <h1 className="text-3xl font-bold text-gray-900 mb-4">{product.name}</h1>
-            <p className="text-2xl text-black font-bold mb-6">
+            <p className="text-2xl text-blue-600 font-bold mb-6">
               ${product.price.toLocaleString()}
             </p>
             
@@ -153,6 +153,21 @@ const ProductDetail = () => {
                   </button>
                 ))}
               </div>
+            </div>
+
+            <div className="flex gap-4">
+              <button
+                className="flex-1 bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition flex items-center justify-center"
+                disabled={!selectedSize}
+              >
+                <ShoppingCart className="h-5 w-5 mr-2" />
+                Agregar al carrito
+              </button>
+              <button
+                className="w-12 h-12 border border-gray-300 rounded-lg flex items-center justify-center hover:bg-gray-50 transition"
+              >
+                <Heart className="h-5 w-5 text-gray-600" />
+              </button>
             </div>
 
             <button
