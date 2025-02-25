@@ -1,181 +1,304 @@
 import React from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { ChevronDown, Search } from 'lucide-react';
+import { ChevronDown, Search, ChevronRight } from 'lucide-react';
+/* import { db } from "../firebase/firebaseConfig";  // Importa la referencia a la base de datos desde firebaseConfig
+import { collection, getDocs } from "firebase/firestore";   */// Importa las funciones necesarias de Firestore
+
 
 const products = [
   {
     id: 1,
     name: 'Argentina 2022 Campeón',
-    category: 'camisetas',
-    subcategory: 'camisetas-selecciones',
+    category: 'adulto',
+    subcategory: 'futbol',
+    subsubcategory: 'camisetas',
+    subsubsubcategory: 'selecciones-nacionales',
     price: 24999,
     images: [
       'https://images.unsplash.com/photo-1671465317593-a637c8a0e08c?q=80&w=600&auto=format&fit=crop',
       'https://images.unsplash.com/photo-1671465314792-2bd24c64c1c4?q=80&w=600&auto=format&fit=crop'
     ],
-    temporada: '2022',
-    marca: 'Adidas'
   },
   {
     id: 2,
     name: 'Boca Juniors 2024',
-    category: 'camisetas',
-    subcategory: 'camisetas-clubes-nacionales',
+    category: 'adulto',
+    subcategory: 'futbol',
+    subsubcategory: 'camisetas',
+    subsubsubcategory: 'clubes-nacionales',
     price: 22999,
     images: [
       'https://images.unsplash.com/photo-1614632537197-38a17061c2bd?q=80&w=600&auto=format&fit=crop',
       'https://images.unsplash.com/photo-1614632537355-3aa9c93c8e8c?q=80&w=600&auto=format&fit=crop'
     ],
-    temporada: '2024',
-    marca: 'Adidas'
   },
   {
     id: 3,
     name: 'River Plate Retro 1986',
-    category: 'camisetas-retro',
-    subcategory: 'retro-clubes-nacionales',
+    category: 'adulto',
+    subcategory: 'futbol',
+    subsubcategory: 'camisetas-retro',
+    subsubsubcategory: 'clubes-nacionales',
     price: 19999,
     images: [
       'https://images.unsplash.com/photo-1577471488278-16eec37ffcc2?q=80&w=600&auto=format&fit=crop',
       'https://images.unsplash.com/photo-1577471488695-a4dd0d38c335?q=80&w=600&auto=format&fit=crop'
     ],
-    temporada: '1986',
-    marca: 'Adidas'
+  },
+  {
+    id: 3,
+    name: 'River Plate Retro 1986',
+    category: 'adulto',
+    subcategory: 'futbol',
+    subsubcategory: 'camisetas-retro',
+    subsubsubcategory: 'clubes-nacionales',
+    price: 19999,
+    images: [
+      'https://images.unsplash.com/photo-1577471488278-16eec37ffcc2?q=80&w=600&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1577471488695-a4dd0d38c335?q=80&w=600&auto=format&fit=crop'
+    ],
   }
 ];
 
 const categories = [
   {
-    id: 'camisetas-retro',
-    name: 'Camisetas Retro',
+    id: 'adulto',
+    name: 'Adulto',
     subcategories: [
-      { id: 'retro-clubes-internacionales', name: 'Clubes Internacionales' },
-      { id: 'retro-clubes-nacionales', name: 'Clubes Nacionales' },
-      { id: 'retro-selecciones', name: 'Selecciones Nacionales' }
-    ]
-  },
-  {
-    id: 'camisetas',
-    name: 'Camisetas',
-    subcategories: [
-      { id: 'camisetas-clubes-nacionales', name: 'Clubes Nacionales' },
-      { id: 'camisetas-clubes-internacionales', name: 'Clubes Internacionales' },
-      { id: 'camisetas-selecciones', name: 'Selecciones Nacionales' }
-    ]
-  },
-  {
-    id: 'remeras-algodon',
-    name: 'Remeras Algodón',
-    subcategories: [
-      { id: 'remeras-clubes-internacionales', name: 'Clubes Internacionales' },
       {
-        id: 'remeras-clubes-nacionales',
-        name: 'Clubes Nacionales',
-        subItems: [
-          { id: 'river', name: 'River' },
-          { id: 'boca', name: 'Boca' },
-          { id: 'racing', name: 'Racing' },
-          { id: 'san-lorenzo', name: 'San Lorenzo' },
-          { id: 'independiente', name: 'Independiente' },
-          { id: 'afa', name: 'AFA' },
-          { id: 'resto', name: 'Resto' }
+        id: 'futbol',
+        name: 'Fútbol',
+        subcategories: [
+          {
+            id: 'bermudas',
+            name: 'Bermudas'
+          },
+          {
+            id: 'chombas',
+            name: 'Chombas'
+          },
+          {
+            id: 'entrenamiento',
+            name: 'Entrenamiento'
+          },
+          {
+            id: 'camisetas',
+            name: 'Camisetas',
+            subcategories: [
+              { id: 'clubes-internacionales', name: 'Clubes Internacionales' },
+              { id: 'clubes-nacionales', name: 'Clubes Nacionales' },
+              { id: 'selecciones-nacionales', name: 'Selecciones Nacionales' }
+            ]
+          },
+          {
+            id: 'camisetas-retro',
+            name: 'Camisetas Retro',
+            subcategories: [
+              { id: 'retro-clubes-internacionales', name: 'Clubes Internacionales' },
+              { id: 'retro-clubes-nacionales', name: 'Clubes Nacionales' },
+              { id: 'retro-selecciones-nacionales', name: 'Selecciones Nacionales' }
+            ]
+          },
+          {
+            id: 'camperas-buzos',
+            name: 'Camperas y Buzos',
+            subcategories: [
+              { id: 'afa', name: 'AFA' },
+              { id: 'internacional', name: 'Internacional' },
+              { id: 'nacional', name: 'Nacional' }
+            ]
+          },
+          {
+            id: 'chupines-entrenamiento',
+            name: 'Chupines Entrenamiento'
+          },
+          {
+            id: 'remeras-algodon',
+            name: 'Remeras Algodón',
+            subcategories: [
+              { id: 'algodon-clubes-internacionales', name: 'Clubes Internacionales' },
+              { id: 'algodon-clubes-nacionales', name: 'Clubes Nacionales' }
+            ]
+          },
+          {
+            id: 'shorts',
+            name: 'Shorts'
+          }
+        ]
+      },
+      {
+        id: 'basquet',
+        name: 'Básquet',
+        subcategories: [
+          { id: 'basquet-bermudas', name: 'Bermudas' },
+          { id: 'basquet-buzos', name: 'Buzos' },
+          { id: 'basquet-camperas', name: 'Camperas' },
+          { id: 'basquet-chupines', name: 'Chupines' },
+          { id: 'basquet-gorras', name: 'Gorras' },
+          {
+            id: 'basquet-musculosas',
+            name: 'Musculosas',
+            subcategories: [
+              { id: 'apliques', name: 'Apliques' },
+              { id: 'calidad-original', name: 'Calidad Original' },
+              { id: 'replicas', name: 'Replicas' },
+              { id: 'sublimadas', name: 'Sublimadas' }
+            ]
+          },
+          { id: 'basquet-remeras-algodon', name: 'Remeras Algodón' }
         ]
       }
     ]
   },
   {
-    id: 'camperas-buzos',
-    name: 'Camperas y Buzos',
+    id: 'nino',
+    name: 'Niño',
     subcategories: [
-      { id: 'camperas-internacional', name: 'Internacional' },
-      { id: 'camperas-nacional', name: 'Nacional' },
-      { id: 'camperas-afa', name: 'AFA' }
-    ]
-  },
-  {
-    id: 'musculosas',
-    name: 'Musculosas',
-    subcategories: [
-      { id: 'musculosas-calidad-original', name: 'Calidad Original' },
-      { id: 'musculosas-apliques', name: 'Apliques' },
-      { id: 'musculosas-replicas', name: 'Replicas' },
-      { id: 'musculosas-sublimadas', name: 'Sublimadas' }
-    ]
-  },
-  {
-    id: 'ninos',
-    name: 'Niños',
-    subcategories: [
-      { id: 'futbol-nino', name: 'Fútbol Niño' },
-      { id: 'basket-nino', name: 'Basket Niño' },
-      { id: 'merchandising', name: 'Merchandising' }
-
-    ]
-  },
-  {
-    id: 'otros',
-    name: 'Otros',
-    subcategories: [
-      { id: 'shorts', name: 'Shorts' },
-      { id: 'bermudas', name: 'Bermudas' },
-      { id: 'chupines', name: 'Chupines' },
-      { id: 'gorras', name: 'Gorras' },
+      { id: 'nino-basquet', name: 'Básquet' },
+      { id: 'nino-futbol', name: 'Fútbol' },
+      { id: 'nino-merchandising', name: 'Merchandising' }
     ]
   }
 ];
-
-const temporadas = ['2024', '2023', '2022', '2021', '2020', '1986'];
-const marcas = ['Adidas', 'Nike', 'Puma', 'Kappa', 'Under Armour'];
 
 const Products = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const currentCategory = searchParams.get('categoria') || 'todos';
   const currentSubcategory = searchParams.get('subcategoria');
-  const currentSubItem = searchParams.get('subitem');
-  const [expandedCategory, setExpandedCategory] = React.useState<string | null>(null);
+  const currentSubSubcategory = searchParams.get('subsubcategoria');
+  const currentSubSubSubcategory = searchParams.get('subsubsubcategoria');
+  const [expandedCategories, setExpandedCategories] = React.useState<string[]>([]);
   const [showFilters] = React.useState(false);
   const [searchTerm, setSearchTerm] = React.useState('');
-  const [selectedTemporadas, setSelectedTemporadas] = React.useState<string[]>([]);
-  const [selectedMarcas, setSelectedMarcas] = React.useState<string[]>([]);
+
+  React.useEffect(() => {
+    const newExpandedCategories = new Set(expandedCategories);
+    
+    if (currentCategory !== 'todos') {
+      newExpandedCategories.add(currentCategory);
+      
+      if (currentSubcategory) {
+        newExpandedCategories.add(currentSubcategory);
+        
+        if (currentSubSubcategory) {
+          newExpandedCategories.add(currentSubSubcategory);
+        }
+      }
+    }
+    
+    setExpandedCategories(Array.from(newExpandedCategories));
+  }, [currentCategory, currentSubcategory, currentSubSubcategory]);
 
   const toggleCategory = (categoryId: string) => {
-    setExpandedCategory(expandedCategory === categoryId ? null : categoryId);
-  };
-
-  const toggleTemporada = (temporada: string) => {
-    setSelectedTemporadas(prev => 
-      prev.includes(temporada) 
-        ? prev.filter(t => t !== temporada)
-        : [...prev, temporada]
+    setExpandedCategories(prev => 
+      prev.includes(categoryId)
+        ? prev.filter(id => id !== categoryId)
+        : [...prev, categoryId]
     );
   };
 
-  const toggleMarca = (marca: string) => {
-    setSelectedMarcas(prev => 
-      prev.includes(marca) 
-        ? prev.filter(m => m !== marca)
-        : [...prev, marca]
-    );
+  const isCategoryExpanded = (categoryId: string) => {
+    return expandedCategories.includes(categoryId);
+  };
+
+  const isCategorySelected = (categoryId: string, path: any) => {
+    return Object.values(path).includes(categoryId) || 
+           categoryId === currentCategory ||
+           categoryId === currentSubcategory ||
+           categoryId === currentSubSubcategory ||
+           categoryId === currentSubSubSubcategory;
+  };
+
+  const getBreadcrumbs = () => {
+    const breadcrumbs = [];
+    
+    if (currentCategory !== 'todos') {
+      const category = categories.find(c => c.id === currentCategory);
+      if (category) {
+        breadcrumbs.push({ id: category.id, name: category.name });
+        
+        if (currentSubcategory) {
+          const subcategory = category.subcategories?.find(s => s.id === currentSubcategory);
+          if (subcategory) {
+            breadcrumbs.push({ id: subcategory.id, name: subcategory.name });
+            
+            if (currentSubSubcategory) {
+              const subsubcategory = 'subcategories' in subcategory ? (subcategory.subcategories as any[]).find(s => s.id === currentSubSubcategory) : undefined;
+              if (subsubcategory) {
+                breadcrumbs.push({ id: subsubcategory.id, name: subsubcategory.name });
+                
+                if (currentSubSubSubcategory) {
+                  const subsubsubcategory = subsubcategory.subcategories?.find((s: { id: string }) => s.id === currentSubSubSubcategory);
+                  if (subsubsubcategory) {
+                    breadcrumbs.push({ id: subsubsubcategory.id, name: subsubsubcategory.name });
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    
+    return breadcrumbs;
+  };
+
+  const renderCategoryTree = (categories: any[], level = 0, parentPath = {}) => {
+    return categories.map(category => {
+      const currentPath = { ...parentPath, [`level${level}`]: category.id };
+      const isExpanded = isCategoryExpanded(category.id);
+      const isSelected = isCategorySelected(category.id, currentPath);
+      
+      return (
+        <div key={category.id} className={`ml-${level * 4}`}>
+          <button
+            onClick={() => {
+              if (category.subcategories) {
+                toggleCategory(category.id);
+              }
+              setSearchParams({ ...currentPath });
+            }}
+            className={`w-full text-left px-4 py-2 rounded-md transition flex items-center justify-between ${
+              isSelected
+                ? 'bg-gray-800 text-white font-medium shadow-sm'
+                : 'text-gray-600 hover:bg-gray-100'
+            }`}
+          >
+            <span>{category.name}</span>
+            {category.subcategories && (
+              <ChevronDown
+                className={`h-4 w-4 transition-transform ${
+                  isExpanded ? 'rotate-180' : ''
+                } ${isSelected ? 'text-white' : 'text-gray-400'}`}
+              />
+            )}
+          </button>
+          
+          {isExpanded && category.subcategories && (
+            <div className="ml-4 mt-1 space-y-1 border-l-2 border-gray-200 pl-2">
+              {renderCategoryTree(category.subcategories, level + 1, currentPath)}
+            </div>
+          )}
+        </div>
+      );
+    });
   };
 
   const filteredProducts = React.useMemo(() => {
     return products.filter(product => {
-      // Category filter
-      if (currentCategory !== 'todos' && product.category !== currentCategory) return false;
-      if (currentSubcategory && product.subcategory !== currentSubcategory) return false;
+      if (currentCategory !== 'todos') {
+        if (product.category !== currentCategory) return false;
+        if (currentSubcategory && product.subcategory !== currentSubcategory) return false;
+        if (currentSubSubcategory && product.subsubcategory !== currentSubSubcategory) return false;
+        if (currentSubSubSubcategory && product.subsubsubcategory !== currentSubSubSubcategory) return false;
+      }
       
-      // Search filter
       if (searchTerm && !product.name.toLowerCase().includes(searchTerm.toLowerCase())) return false;
-      
-      // Temporada filter
-      if (selectedTemporadas.length > 0 && !selectedTemporadas.includes(product.temporada)) return false;
-      
-      // Marca filter
-      if (selectedMarcas.length > 0 && !selectedMarcas.includes(product.marca)) return false;
+
       
       return true;
     });
-  }, [currentCategory, currentSubcategory, currentSubItem, searchTerm, selectedTemporadas, selectedMarcas]);
+  }, [currentCategory, currentSubcategory, currentSubSubcategory, currentSubSubSubcategory, searchTerm]);
 
   return (
     <div className="bg-gray-50 min-h-screen">
@@ -194,142 +317,91 @@ const Products = () => {
           </div>
         </div>
 
-        <div className="flex flex-col md:flex-row gap-8">
-          {/* Filters Sidebar */}
-          <div className={`md:w-64 ${showFilters ? 'block' : 'hidden md:block'}`}>
-          <div className="md:w-64 hidden md:block">
-              {/* Categories */}
-              <div className="bg-white p-4 rounded-lg shadow-md">
-                <h2 className="font-semibold text-gray-900 mb-4">Categorías</h2>
-                <div className="space-y-2">
+        {/* Breadcrumbs */}
+        {currentCategory !== 'todos' && (
+          <div className="mb-6">
+            <nav className="flex" aria-label="Breadcrumb">
+              <ol className="flex flex-wrap items-center space-x-2">
+                <li>
                   <button
                     onClick={() => {
                       setSearchParams({});
-                      setExpandedCategory(null);
+                      setExpandedCategories([]);
+                    }}
+                    className="text-gray-500 hover:text-gray-700"
+                  >
+                    Todas las Categorías
+                  </button>
+                </li>
+                {getBreadcrumbs().map((crumb, index) => (
+                  <React.Fragment key={crumb.id}>
+                    <ChevronRight className="h-4 w-4 text-gray-400 flex-shrink-0" />
+                    <li>
+                      <span className={`${
+                        index === getBreadcrumbs().length - 1
+                          ? 'text-black font-medium'
+                          : 'text-gray-500'
+                      }`}>
+                        {crumb.name}
+                      </span>
+                    </li>
+                  </React.Fragment>
+                ))}
+              </ol>
+            </nav>
+          </div>
+        )}
+
+        <div className="flex flex-col md:flex-row gap-8">
+          {/* Filters Sidebar */}
+          <div className={`md:w-80 ${showFilters ? 'block' : 'hidden md:block'}`}>
+          <div className="md:w-80 hidden md:block">
+              {/* Categories */}
+              <div className="bg-white p-4 rounded-lg shadow-md">
+                <h2 className="font-semibold text-gray-900 mb-4">Categorías</h2>
+                <div className="space-y-1">
+                  <button
+                    onClick={() => {
+                      setSearchParams({});
+                      setExpandedCategories([]);
                     }}
                     className={`w-full text-left px-4 py-2 rounded-md transition ${
                       currentCategory === 'todos'
-                        ? 'bg-blue-600 text-white'
+                        ? 'bg-gray-800 text-white font-medium shadow-sm'
                         : 'text-gray-600 hover:bg-gray-100'
                     }`}
                   >
                     Todas las Categorías
                   </button>
 
-                  {categories.map(category => (
-                    <div key={category.id} className="space-y-1">
-                      <button
-                        onClick={() => {
-                          toggleCategory(category.id);
-                          setSearchParams({ categoria: category.id });
-                        }}
-                        className={`w-full text-left px-4 py-2 rounded-md transition flex items-center justify-between ${
-                          currentCategory === category.id && !currentSubcategory
-                            ? 'bg-blue-600 text-white'
-                            : 'text-gray-600 hover:bg-gray-100'
-                        }`}
-                      >
-                        <span>{category.name}</span>
-                        <ChevronDown
-                          className={`h-4 w-4 transition-transform ${
-                            expandedCategory === category.id ? 'rotate-180' : ''
-                          }`}
-                        />
-                      </button>
-
-                      {expandedCategory === category.id && (
-                        <div className="ml-4 space-y-1">
-                          {category.subcategories.map(subcategory => (
-                            <div key={subcategory.id}>
-                              <button
-                                onClick={() => setSearchParams({
-                                  categoria: category.id,
-                                  subcategoria: subcategory.id
-                                })}
-                                className={`w-full text-left px-4 py-2 rounded-md transition ${
-                                  currentSubcategory === subcategory.id
-                                    ? 'bg-blue-600 text-white'
-                                    : 'text-gray-600 hover:bg-gray-100'
-                                }`}
-                              >
-                                {subcategory.name}
-                              </button>
-                              {subcategory.subItems && (
-                                <div className="ml-4 space-y-1">
-                                  {subcategory.subItems.map(item => (
-                                    <button
-                                      key={item.id}
-                                      onClick={() => setSearchParams({
-                                        categoria: category.id,
-                                        subcategoria: subcategory.id,
-                                        subitem: item.id
-                                      })}
-                                      className={`w-full text-left px-4 py-2 rounded-md transition ${
-                                        currentSubItem === item.id
-                                          ? 'bg-blue-600 text-white'
-                                          : 'text-gray-600 hover:bg-gray-100'
-                                      }`}
-                                    >
-                                      {item.name}
-                                    </button>
-                                  ))}
-                                </div>
-                              )}
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  ))}
+                  <div className="mt-2 space-y-1">
+                    {renderCategoryTree(categories)}
+                  </div>
                 </div>
               </div>
 
               {/* Temporadas */}
-              <div className="bg-white p-4 rounded-lg shadow-md">
-                <h2 className="font-semibold text-gray-900 mb-4">Temporadas</h2>
-                <div className="space-y-2">
-                  {temporadas.map(temporada => (
-                    <label
-                      key={temporada}
-                      className="flex items-center space-x-2 cursor-pointer"
-                    >
-                      <input
-                        type="checkbox"
-                        checked={selectedTemporadas.includes(temporada)}
-                        onChange={() => toggleTemporada(temporada)}
-                        className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                      />
-                      <span className="text-gray-700">{temporada}</span>
-                    </label>
-                  ))}
-                </div>
-              </div>
+              
 
               {/* Marcas */}
-              <div className="bg-white p-4 rounded-lg shadow-md">
-                <h2 className="font-semibold text-gray-900 mb-4">Marcas</h2>
-                <div className="space-y-2">
-                  {marcas.map(marca => (
-                    <label
-                      key={marca}
-                      className="flex items-center space-x-2 cursor-pointer"
-                    >
-                      <input
-                        type="checkbox"
-                        checked={selectedMarcas.includes(marca)}
-                        onChange={() => toggleMarca(marca)}
-                        className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                      />
-                      <span className="text-gray-700">{marca}</span>
-                    </label>
-                  ))}
-                </div>
-              </div>
+              
             </div>
           </div>
 
           {/* Product Grid */}
           <div className="flex-1">
+            {/* Category Title */}
+            {currentCategory !== 'todos' && (
+              <div className="mb-6">
+                <h1 className="text-2xl font-bold text-gray-900">
+                  {getBreadcrumbs().map(crumb => crumb.name).join(' › ')}
+                </h1>
+                <p className="text-gray-600 mt-2">
+                  {filteredProducts.length} {filteredProducts.length === 1 ? 'producto' : 'productos'} encontrados
+                </p>
+              </div>
+            )}
+
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
               {filteredProducts.map(product => (
                 <a
@@ -346,9 +418,8 @@ const Products = () => {
                       />
                     </div>
                     <div className="p-3">
-                      <p className="text-xs text-gray-500 mb-1">{product.marca} - {product.temporada}</p>
                       <h3 className="text-sm font-medium text-gray-900 line-clamp-2 mb-2">{product.name}</h3>
-                      <p className="text-blue-600 font-bold text-lg">
+                      <p className="text-black font-bold text-lg">
                         ${product.price.toLocaleString()}
                       </p>
                     </div>
