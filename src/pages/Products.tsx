@@ -1,9 +1,6 @@
 import React from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { ChevronDown, Search, ChevronRight } from 'lucide-react';
-/* import { db } from "../firebase/firebaseConfig";  // Importa la referencia a la base de datos desde firebaseConfig
-import { collection, getDocs } from "firebase/firestore";   */// Importa las funciones necesarias de Firestore
-
+import { Filter, ChevronDown, Search, ChevronRight, X } from 'lucide-react';
 
 const products = [
   {
@@ -15,9 +12,11 @@ const products = [
     subsubsubcategory: 'selecciones-nacionales',
     price: 24999,
     images: [
-      'https://images.unsplash.com/photo-1671465317593-a637c8a0e08c?q=80&w=600&auto=format&fit=crop',
+      '../assets/Adulto/Futbol/Bermudas/40.jpg',
       'https://images.unsplash.com/photo-1671465314792-2bd24c64c1c4?q=80&w=600&auto=format&fit=crop'
     ],
+    temporada: '2022',
+    marca: 'Adidas'
   },
   {
     id: 2,
@@ -31,6 +30,8 @@ const products = [
       'https://images.unsplash.com/photo-1614632537197-38a17061c2bd?q=80&w=600&auto=format&fit=crop',
       'https://images.unsplash.com/photo-1614632537355-3aa9c93c8e8c?q=80&w=600&auto=format&fit=crop'
     ],
+    temporada: '2024',
+    marca: 'Adidas'
   },
   {
     id: 3,
@@ -44,19 +45,8 @@ const products = [
       'https://images.unsplash.com/photo-1577471488278-16eec37ffcc2?q=80&w=600&auto=format&fit=crop',
       'https://images.unsplash.com/photo-1577471488695-a4dd0d38c335?q=80&w=600&auto=format&fit=crop'
     ],
-  },
-  {
-    id: 3,
-    name: 'River Plate Retro 1986',
-    category: 'adulto',
-    subcategory: 'futbol',
-    subsubcategory: 'camisetas-retro',
-    subsubsubcategory: 'clubes-nacionales',
-    price: 19999,
-    images: [
-      'https://images.unsplash.com/photo-1577471488278-16eec37ffcc2?q=80&w=600&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1577471488695-a4dd0d38c335?q=80&w=600&auto=format&fit=crop'
-    ],
+    temporada: '1986',
+    marca: 'Adidas'
   }
 ];
 
@@ -72,14 +62,6 @@ const categories = [
           {
             id: 'bermudas',
             name: 'Bermudas'
-          },
-          {
-            id: 'chombas',
-            name: 'Chombas'
-          },
-          {
-            id: 'entrenamiento',
-            name: 'Entrenamiento'
           },
           {
             id: 'camisetas',
@@ -109,8 +91,25 @@ const categories = [
             ]
           },
           {
+            id: 'chombas',
+            name: 'Chombas',
+            subcategories: [
+              { id: 'chombas-clubes', name: 'Clubes' },
+              { id: 'chombas-selecciones', name: 'Selecciones' }
+            ]
+          },
+          {
             id: 'chupines-entrenamiento',
             name: 'Chupines Entrenamiento'
+          },
+          {
+            id: 'entrenamiento',
+            name: 'Entrenamiento',
+            subcategories: [
+              { id: 'conjuntos', name: 'Conjuntos' },
+              { id: 'remeras', name: 'Remeras' },
+              { id: 'shorts', name: 'Shorts' }
+            ]
           },
           {
             id: 'remeras-algodon',
@@ -167,9 +166,10 @@ const Products = () => {
   const currentSubcategory = searchParams.get('subcategoria');
   const currentSubSubcategory = searchParams.get('subsubcategoria');
   const currentSubSubSubcategory = searchParams.get('subsubsubcategoria');
+  const [showFilters, setShowFilters] = React.useState(false);
   const [expandedCategories, setExpandedCategories] = React.useState<string[]>([]);
-  const [showFilters] = React.useState(false);
   const [searchTerm, setSearchTerm] = React.useState('');
+
 
   React.useEffect(() => {
     const newExpandedCategories = new Set(expandedCategories);
@@ -197,6 +197,7 @@ const Products = () => {
     );
   };
 
+
   const isCategoryExpanded = (categoryId: string) => {
     return expandedCategories.includes(categoryId);
   };
@@ -223,7 +224,7 @@ const Products = () => {
             breadcrumbs.push({ id: subcategory.id, name: subcategory.name });
             
             if (currentSubSubcategory) {
-              const subsubcategory = 'subcategories' in subcategory ? (subcategory.subcategories as any[]).find(s => s.id === currentSubSubcategory) : undefined;
+              const subsubcategory = 'subcategories' in subcategory && Array.isArray(subcategory.subcategories) ? subcategory.subcategories.find(s => s.id === currentSubSubcategory) : undefined;
               if (subsubcategory) {
                 breadcrumbs.push({ id: subsubcategory.id, name: subsubcategory.name });
                 
@@ -260,7 +261,7 @@ const Products = () => {
             }}
             className={`w-full text-left px-4 py-2 rounded-md transition flex items-center justify-between ${
               isSelected
-                ? 'bg-gray-800 text-white font-medium shadow-sm'
+                ? 'bg-green-600 text-white font-medium shadow-sm'
                 : 'text-gray-600 hover:bg-gray-100'
             }`}
           >
@@ -294,7 +295,6 @@ const Products = () => {
       }
       
       if (searchTerm && !product.name.toLowerCase().includes(searchTerm.toLowerCase())) return false;
-
       
       return true;
     });
@@ -303,6 +303,24 @@ const Products = () => {
   return (
     <div className="bg-gray-50 min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Mobile Filter Toggle */}
+        <div className="md:hidden mb-4">
+          <button
+            onClick={() => setShowFilters(!showFilters)}
+            className="w-full bg-white px-4 py-2 rounded-lg shadow-sm flex items-center justify-between text-gray-700 hover:bg-gray-50 transition"
+          >
+            <span className="flex items-center">
+              <Filter className="h-5 w-5 mr-2" />
+              Filtros
+            </span>
+            {showFilters ? (
+              <X className="h-5 w-5" />
+            ) : (
+              <ChevronDown className="h-5 w-5" />
+            )}
+          </button>
+        </div>
+
         {/* Search Bar */}
         <div className="mb-8">
           <div className="relative">
@@ -311,7 +329,7 @@ const Products = () => {
               placeholder="Buscar productos..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full px-4 py-3 pl-12 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-3 pl-12 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-500 focus:border-transparent"
             />
             <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
           </div>
@@ -339,7 +357,7 @@ const Products = () => {
                     <li>
                       <span className={`${
                         index === getBreadcrumbs().length - 1
-                          ? 'text-black font-medium'
+                          ? 'text-green-600 font-medium'
                           : 'text-gray-500'
                       }`}>
                         {crumb.name}
@@ -354,8 +372,8 @@ const Products = () => {
 
         <div className="flex flex-col md:flex-row gap-8">
           {/* Filters Sidebar */}
-          <div className={`md:w-80 ${showFilters ? 'block' : 'hidden md:block'}`}>
-          <div className="md:w-80 hidden md:block">
+          <div className={`md:w-72 ${showFilters ? 'block' : 'hidden md:block'}`}>
+            <div className="space-y-6">
               {/* Categories */}
               <div className="bg-white p-4 rounded-lg shadow-md">
                 <h2 className="font-semibold text-gray-900 mb-4">Categorías</h2>
@@ -367,7 +385,7 @@ const Products = () => {
                     }}
                     className={`w-full text-left px-4 py-2 rounded-md transition ${
                       currentCategory === 'todos'
-                        ? 'bg-gray-800 text-white font-medium shadow-sm'
+                        ? 'bg-green-600 text-white font-medium shadow-sm'
                         : 'text-gray-600 hover:bg-gray-100'
                     }`}
                   >
@@ -380,11 +398,6 @@ const Products = () => {
                 </div>
               </div>
 
-              {/* Temporadas */}
-              
-
-              {/* Marcas */}
-              
             </div>
           </div>
 
@@ -418,8 +431,9 @@ const Products = () => {
                       />
                     </div>
                     <div className="p-3">
+                      <p className="text-xs text-gray-500 mb-1">{product.marca} - {product.temporada}</p>
                       <h3 className="text-sm font-medium text-gray-900 line-clamp-2 mb-2">{product.name}</h3>
-                      <p className="text-black font-bold text-lg">
+                      <p className="text-green-600 font-bold text-lg">
                         ${product.price.toLocaleString()}
                       </p>
                     </div>
