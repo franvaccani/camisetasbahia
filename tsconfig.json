@@ -8,15 +8,16 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": false,  // Permite generar archivos .js
+    "noEmit": true,  // Cambiar a true
     "jsx": "react-jsx",
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "allowImportingTsExtensions": true  // Mantener esta opción
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx"],  // Solo incluye archivos .ts y .tsx
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
   "exclude": ["node_modules"]
 }
