@@ -69,7 +69,7 @@ const AdminPanel = () => {
     };
 
     axios.post(`${API_URL}/categories/${selectedCategory}/subcategories/${selectedSubcategory}/products`, newProduct)
-      .then((response) => {
+      .then(() => {
         alert('Producto agregado correctamente');
         reset();  // Resetear el formulario
       })
