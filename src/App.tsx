@@ -10,8 +10,6 @@ import WhatsAppButton from './components/WhatsAppButton';
 
 // Importamos las páginas del admin
 import AdminPanel from './pages/Admin/admin-panel/AdminPanel';
-import AdminProducts from './pages/Admin/admin-panel/AdminProducts';
-import AdminCategories from './pages/Admin/admin-panel/AdminCategories';
 
 function App() {
   return (
@@ -29,8 +27,6 @@ function App() {
 
             {/* Rutas del Admin */}
             <Route path="/admin" element={<AdminPanel />} />
-            <Route path="/admin/productos" element={<AdminProducts />} />
-            <Route path="/admin/categorias" element={<AdminCategories />} />
           </Routes>
         </main>
         <Footer />
