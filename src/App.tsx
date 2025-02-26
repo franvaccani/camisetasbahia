@@ -9,7 +9,7 @@ import Contact from './pages/Contact';
 import WhatsAppButton from './components/WhatsAppButton';
 
 // Importamos las páginas del admin
-import AdminPanel from './pages/Admin/admin-panel/AdminPanel';
+import AdminPanel from './pages/Admin/AdminPanel';
 
 function App() {
   return (
